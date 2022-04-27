@@ -13,12 +13,9 @@ class CacheManager {
       _preferences = value;
     });
   }
+
   static Future prefrencesInit() async {
     instance._preferences ??= await SharedPreferences.getInstance();
-  }
-
-  Future<void> clearAll() async {
-    await _preferences!.clear();
   }
 
   Future<void> setStringValue(
@@ -26,13 +23,6 @@ class CacheManager {
     await _preferences!.setString(key.toString(), value);
   }
 
-  Future<void> setBoolValue(PreferencesKey key, bool value) async {
-    await _preferences!.setBool(key.toString(), value);
-  }
-
   String getStringValue({required PreferencesKey key}) =>
       _preferences?.getString(key.toString()) ?? '';
-
-  bool getBoolValue(PreferencesKey key) =>
-      _preferences!.getBool(key.toString()) ?? false;
 }

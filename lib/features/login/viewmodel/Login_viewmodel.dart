@@ -40,6 +40,17 @@ class LoginCubit extends Cubit<LoginState> {
     }
   }
 
+  void tryLogin() {
+    emit(LoginInitial());
+  }
+
+  Future<void> logOut() async {
+    changeLoadingStatus();
+    await cacheManager.setStringValue(key: PreferencesKey.token, value: "");
+    changeLoadingStatus();
+    emit(LoginInitial());
+  }
+
   void changeLoadingStatus() {
     isLoading = !isLoading;
     emit(LoginLoading(isLoading: isLoading));
