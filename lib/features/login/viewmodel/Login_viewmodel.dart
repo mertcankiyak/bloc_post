@@ -26,6 +26,7 @@ class LoginCubit extends Cubit<LoginState> {
       emit(LoginSuccess(token: token));
     } else {
       emit(LoginError(error: "Bir Sorunla Karşılaşıldı"));
+      // Class ile çekme
     }
   }
 
@@ -33,7 +34,7 @@ class LoginCubit extends Cubit<LoginState> {
     changeLoadingStatus();
     String token = cacheManager.getStringValue(key: PreferencesKey.token);
     changeLoadingStatus();
-    if (token != "") {
+    if (token.isNotEmpty) {
       emit(LoginCache(token: token));
     } else {
       emit(LoginInitial());
